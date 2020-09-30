@@ -1,0 +1,41 @@
+﻿@model mvctest.Models.Emp
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+@using (Html.BeginForm("Index", "Home", FormMethod.Post))
+{
+    @Html.Label("Enter EId")
+    @Html.TextBoxFor(model => model.EmpId)
+    <br />
+    @Html.Label("Enter CityName")
+    @Html.TextBoxFor(model => model.EmpName)
+    <br />
+    @Html.Label("Select State")
+    @Html.DropDownList("Dept", TempData["li"] as List<SelectListItem>)
+    <br />
+    <input type="submit" value="Save" />
+    <br />
+    <table>
+        <tr>
+            <td>Eid</td>
+            <td>EmpName</td>
+            <td>DeptName</td>
+        </tr>
+        @foreach (var item in TempData["liemp"] as List<mvctest.Models.Emp>)
+        {
+    <tr>
+        <td>@item.EmpId</td>
+        <td>@item.EmpName</td>
+        <td>@item.Dept.Dname</td>
+        <td>@Html.ActionLink("Edit", "Edit", new { id = @item.EmpId })</td><td>|</td>
+        <td>@Html.ActionLink("Delete", "Delete", new { id = @item.EmpId })</td>
+    </tr>
+            
+        }
+    </table>
+}
+
+
